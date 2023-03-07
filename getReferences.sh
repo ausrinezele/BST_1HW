@@ -1,13 +1,17 @@
 #!/bin/sh
 
-efetch -db SRA -id SRR8985047 -format fasta > SRR8985047.fasta
-efetch -db SRA -id SRR8985048 -format fasta > SRR8985048.fasta
-efetch -db SRA -id SRR8985051 -format fasta > SRR8985051.fasta
-efetch -db SRA -id SRR8985052 -format fasta > SRR8985052.fasta
+# Download Genome reference FASTA
+wget "https://ftp.ensembl.org/pub/release-67/fasta/mus_musculus/dna/Mus_musculus.NCBIM37.67.dna.toplevel.fa.gz" 
+gzip -d Mus_musculus.NCBIM37.67.dna.toplevel.fa.gz
 
-wget -O SRR8985047.gtf "https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=gff3&id=SRR8985047"
-wget -O SRR8985048.gtf "https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=gff3&id=SRR8985048"
-wget -O SRR8985051.gtf "https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=gff3&id=SRR8985052"
-wget -O SRR8985052.gtf "https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=gff3&id=SRR8985052"
+# Download transcriptome reference FASTA.gz
+wget "https://ftp.ensembl.org/pub/release-67/fasta/mus_musculus/dna/Mus_musculus.NCBIM37.67.cdna.all.fa.gz" 
+gzip -d Mus_musculus.NCBIM37.67.cdna.all.fa.gz
 
-fastqc inputs/SRR8985047.fastq.gz
+# Download gtf file
+wget "https://ftp.ensembl.org/pub/release-67/fasta/mus_musculus/dna/Mus_musculus.NCBIM37.67.gtf.gz"
+gzip -d Mus_musculus.NCBIM37.67.gtf.gz
+
+fastq-dump --outdir /inputs --gzip --skip-technical --readids --dumpbase --split-files SRR8985047 SRR8985048 SRR8985051 SRR8985052
+
+ 
