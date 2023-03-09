@@ -10,6 +10,4 @@ gzip -cd ../../inputs/SRR8985051.fastq.gz | echo $((`wc -l`/4))
 gzip -cd ../../inputs/SRR8985052.fastq.gz | echo $((`wc -l`/4))
 
 # Calculate the number of protein-coding genes in your genome
-awk '$2 == "protein_coding"' ../../references/Mus_musculus.NCBIM37.67.gtf | cut -f 9 | cut -f 2 -d ";" | sort -u | wc -l
-awk '$3 == "CDS" {print $0}' ../../references/Mus_musculus.NCBIM37.67.gtf | cut -f 9 | cut -d ";" -f 2 | sort | uniq | wc -l
-awk '$3 == "CDS" {print $0}' ../../references/Mus_musculus.NCBIM37.67.gtf | cut -f 9 | cut -d ";" -f 2 | cut -d " " -f 2 | sort | uniq | wc -l
+awk '$2 == "protein_coding"' ../../references/Mus_musculus.NCBIM37.67.gtf.gz | cut -f 9 | cut -f 2 -d ";" | sort -u | wc -l
