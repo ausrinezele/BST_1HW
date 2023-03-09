@@ -16,6 +16,4 @@ gzip -d ../../references/Mus_musculus.NCBIM37.67.gtf.gz
 prefetch ../../inputs/SRR8985047 ../../inputs/SRR8985048 ../../inputs/SRR8985051 ../../inputs/SRR8985052
 fastq-dump --gzip ../../inputs/SRR8985047 ../../inputs/SRR8985048 ../../inputs/SRR8985051 ../../inputs/SRR8985052
 
-grep '>' Mus_musculus.NCBIM37.67.cdna.all.fa | cut -d ' ' -f1 | sort -u | wc -l
-
  
