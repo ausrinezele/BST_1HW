@@ -2,9 +2,10 @@
 
 threads=6
 
-# Path to reference genome FASTA file
+# Path to reference genome
 ref_genome="../../references/Mus_musculus.NCBIM37.67.dna.toplevel.fa"
 ref_genome_gtf="../../references/Mus_musculus.NCBIM37.67.gtf"
+
 # check if HISAT2 index files exist for reference genome
 if [ ! -f ${ref_genome}.1.ht2 ]; then
   echo "HISAT2 index files not found. Generating index..."
@@ -78,9 +79,5 @@ done
 
 # Create a correlation diagram as well as a PCA plot for data
 multiBamSummary bins --outFileName ../../results/mapped.npz --binSize 1000 -p ${threads} --outRawCounts ../../results/raw_counts.tsv -b ../../outputs/trimmed/*_markdup.bam
-
 plotCorrelation -in ../../results/mapped.npz -c pearson -p heatmap -o ../../results/mapped_data_heatmap.pdf
 plotPCA -in ../../results/mapped.npz -o ../../results/mapped_data_PCA.pdf
-
-
-
